@@ -5,9 +5,9 @@ import time
 import random
 screen_width = 100
 
-# To see the maze, visit
+# To see the maze, visit https://drive.google.com/file/d/1K98vkqbeeqJedcoV2yes1Tpy59kTOxO3/view?usp=sharing
 
-os.startfile("MapWGrid.png")
+# os.startfile("MapWGrid.png")
 
 def readOut(speechVar):
     for character in speechVar:
@@ -18,6 +18,7 @@ def readOut(speechVar):
 
 # https://savagelegend.com/misc-resources/classic-riddles-1-100/
 # https://riddlesdb.com/hard/
+# https://www.riddles.com/what-am-i-riddles
 riddle_Q = [
     "I am greater than God and more evil than the devil. The poor have me, the rich need me and if you eat me you’ll die. What am I?",
     "I walks on four legs in the morning, two legs at noon and three legs in the evening. What am I?",
@@ -50,10 +51,16 @@ riddle_Q = [
     "Die without me, Never thank me. Walk right through me, never feel me. Always watching, never speaking. Always lurking, never seen.",
     "I am a seven letter word containing thousands of letters. What am I?",
     "I start and end with the letter E, yet I only have one letter, what am I?",
-    "My first two letters signify a male, the first three letters a female, the first four a great man, and all of me represents a great woman, what am I?"
+    "My first two letters signify a male, the first three letters a female, the first four a great man, and all of me represents a great woman, what am I?",
+    "With no wings, I fly. With no eyes, I see. With no arms, I climb. More frightening than any beast, stronger than any foe. I am cunning, ruthless, and tall; in the end, I rule all. What am I?",
+    "The higher I climb, the hotter I engage, I can not escape my crystal cage. What am I?",
+    "Double my number, I'm less than a score, half of my number is less than four. Add one to my double when bakers are near, days of the week are still greater, I fear. What am I?",
+    "Large as a mountain, small as a pea, Endlessly swimming in a waterless sea. What am I?",
+    "A dagger thrust at my own heart, Dictates the way I'm swayed. Left I stand, and right I yield, To the twisting of the blade. What am I?",
+    "Weight in my belly, Trees on my back, Nails in my ribs, Feet I do lack. What am I?"
     ]
 
-riddle_A = ["Nothing", "Man", "E", "A River", "Tomorrow Future", "The Stars", "N", "A Coffin", "Charcoal", "Corn", "Fire", "Iron", "Wine", "Wind", "Time", "Icicle", "Echo", "Water", "Barrel", "Reflection", "Silence", "Wholesome", "Egg", "Ton", "Thorn", "Pearl", "Footsteps", "Fish", "Air", "Mailbox", "Envelope", "Heroine"]
+riddle_A = ["Nothing", "Man", "E", "River", "Tomorrow Future", "The Stars", "N", "A Coffin", "Charcoal", "Corn", "Fire", "Iron", "Wine", "Wind", "Time", "Icicle", "Echo", "Water", "Barrel", "Reflection", "Silence", "Wholesome", "Egg", "Ton", "Thorn", "Pearl", "Footsteps", "Fish", "Air", "Mailbox", "Envelope", "Heroine", "Imagination", "Mercury", "Six 6", "Asteroid", "Lock", "Ship Boat"]
 
 abc_list = list("ABCDEFGHIJKLMNO")
 
@@ -75,27 +82,78 @@ moveset_O = ["UL", "UD", "UD", "LD", "UL", "LD", "UL", "UD", "UD", "UD", "UD", "
 move_set = [moveset_A, moveset_B, moveset_C,
             moveset_D, moveset_E, moveset_F, moveset_G, moveset_H, moveset_I, moveset_J, moveset_K, moveset_L, moveset_M, moveset_N, moveset_O, ]
 
-readOut("Hello, welcome to the haunted time maze!\nIn this game, you will be given a certain amount of time to complete the maze.\nEach move will deduct from your remaining time.\nAt random points along the maze, you will be presented with riddles.\nIf you answer a riddle incorrectly, some time will be deducted.\nIf you do not complete the maze in time, it is game over.\nIf you wish to solve the puzzle in the least number of moves, it will take 68 moves!\nGood Luck!\n")
+# readOut("Hello, welcome to the haunted time maze!\nIn this game, you will be given a certain amount of time to complete the maze.\nEach move will deduct from your remaining time.\nAt random points along the maze, you will be presented with riddles.\nIf you answer a riddle incorrectly, some time will be deducted.\nIf you do not complete the maze in time, it is game over.\nIf you wish to solve the puzzle in the least number of moves, it will take 68 moves!\nGood Luck!\n")
 def rand_gen():
     return int(random.randint(1,6))
+time_rem = 0
+def start_screen():
+    global time_rem
+    readOut("Hello, what is your name?")
+    name = input("")
+    readOut("Hello "+ name + ", welcome to the haunted time maze!\nIn this game, you will be given a certain amount of time to complete the maze.\nEach move will deduct from your remaining time.\nAt random points along the maze, you will be presented with riddles.\nIf you answer a riddle incorrectly, some time will be deducted.\nIf you do not complete the maze in time, it is game over.\nIf you wish to solve the puzzle in the least number of moves, it will take 68 moves!\nGood Luck!\n")
+    readOut("What difficulty level would you like to experience?\nEasy, Medium or Hard?")
+    diff = input("Enter a difficulty. ")
+    if diff.upper() == "EASY":
+        time_rem = 250
+    elif diff.upper() == "MEDIUM":
+        time_rem = 200
+    elif diff.upper() == "HARD":
+        time_rem = 120
+start_screen()
 
-time_rem = 200
 unsolved = True
 current_pos_let = "H"
 current_pos_num = "1"
 def maze():
+    global time_rem
     global current_pos_let
     global current_pos_num
-    global time_rem
+    global unsolved
     while unsolved:
         readOut("You have " + str(time_rem) + " months remaining.\n")
         readOut("Your current position is " + current_pos_let + current_pos_num+"\n")
         avail_moves = move_set[abc_list.index(current_pos_let)][int(current_pos_num)-1]
-        readOut("Where would you like to go?\nYou can move: " + str(avail_moves)+"\n")
-        move_inp = input("Enter U, R, D, or L.\n")
+        if avail_moves == "L":
+            avail_words = "Left"
+        if avail_moves == "D":
+            avail_words = "Down"
+        if avail_moves == "DL":
+            avail_words = "Down or Left"
+        if avail_moves == "RL":
+            avail_words = "Right or Left"
+        if avail_moves == "RD":
+            avail_words = "Right or Down"
+        if avail_moves == "RDL":
+            avail_words = "Right, Left, or Down"
+        if avail_moves == "U":
+            avail_words = "Up"
+        if avail_moves == "UL":
+            avail_words = "Up or Left"
+        if avail_moves == "UD":
+            avail_words = "Up or Down"
+        if avail_moves == "UDL":
+            avail_words = "Up, Down, or Left"
+        if avail_moves == "UR":
+            avail_words = "Up or Right"
+        if avail_moves == "URL":
+            avail_words = "Up, Right, or Left"
+        if avail_moves == "URD":
+            avail_words = "Up, Right, or Down"
+        readOut("Where would you like to go?\nYou can move: " + avail_words +"\n")
+        move_inp = input("Enter a move choice.\n")
+        if move_inp.upper() == "LEFT" or move_inp.upper() == "RIGHT" or move_inp.upper() == "UP" or move_inp.upper() == "DOWN":
+            move_inp = move_inp[:1].upper()
+        if move_inp.upper() == "EXIT":
+            exit()
         while move_inp not in list(avail_moves):
-            readOut("\nSorry, you cannot move there.\n")
-            move_inp = input("Enter U, R, D, or L.\n")
+            readOut("Sorry, you cannot move there.\n")
+            move_inp = input("You can move: " + avail_words + "\n")
+            if move_inp.upper() == "LEFT" or move_inp.upper() == "RIGHT" or move_inp.upper() == "UP" or move_inp.upper() == "DOWN":
+                move_inp = move_inp[:1].upper()
+        if current_pos_let == "H" and current_pos_num == "15":
+            if move_inp == "U":
+                readOut("You have won the game!")
+                unsolved = False
         if move_inp == "L":
             current_pos_let = abc_list[abc_list.index(current_pos_let)-1] 
         if move_inp == "R":
@@ -121,6 +179,6 @@ def maze():
                 readOut(str(time_taken) + " months have been taken away from your journey.\n")
                 riddle_A.pop(rand_Rid)
                 riddle_Q.pop(rand_Rid)
-                
     
 maze()
+    
