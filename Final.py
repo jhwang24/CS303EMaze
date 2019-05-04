@@ -90,15 +90,15 @@ def start_screen():
     global time_rem
     readOut("Hello, what is your name?")
     name = input("")
-    readOut("Hello "+ name + ", welcome to the haunted time maze!\nIn this game, you will be given a certain amount of time to complete the maze.\nEach move will deduct from your remaining time.\nAt random points along the maze, you will be presented with riddles.\nIf you answer a riddle incorrectly, some time will be deducted.\nIf you do not complete the maze in time, it is game over.\nIf you wish to solve the puzzle in the least number of moves, it will take 68 moves!\nGood Luck!\n")
+    readOut("Hello "+ name + ", welcome to the haunted time maze!\nIn this game, you will be given a certain amount of time to complete the maze.\nEach move will deduct from your remaining time.\nAt random points along the maze, you will be presented with riddles.\nIf you answer a riddle incorrectly, some time will be deducted.\nIf you answer a riddle correctly, some time will be added\nIf you do not complete the maze in time, it is game over.\nIf you do not complete the maze in time, it is game over.\nIf you wish to solve the puzzle in the least number of moves, it will take 68 moves!\nGood Luck!\n")
     readOut("What difficulty level would you like to experience?\nEasy, Medium or Hard?")
     diff = input("Enter a difficulty. ")
     if diff.upper() == "EASY":
-        time_rem = 250
+        time_rem = 500
     elif diff.upper() == "MEDIUM":
-        time_rem = 200
+        time_rem = 375
     elif diff.upper() == "HARD":
-        time_rem = 120
+        time_rem = 250
 start_screen()
 
 unsolved = True
@@ -170,6 +170,9 @@ def maze():
             rid_inp = input("")
             if rid_inp.upper() in riddle_A[rand_Rid].upper() or riddle_A[rand_Rid].upper() in rid_inp.upper():
                 readOut("You are correct, the fates ares are on your side.\n")
+                time_added = random.randint(2, 7)
+                time_rem = time_rem + time_added
+                readOut(str(time_added) + " months have been added to your journey.\n")
                 riddle_A.pop(rand_Rid)
                 riddle_Q.pop(rand_Rid)
             else:
