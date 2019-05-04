@@ -3,7 +3,9 @@ import sys
 import os
 import time
 import random
+
 screen_width = 100
+
 
 # To see the maze, visit https://drive.google.com/file/d/1K98vkqbeeqJedcoV2yes1Tpy59kTOxO3/view?usp=sharing
 
@@ -58,52 +60,66 @@ riddle_Q = [
     "Large as a mountain, small as a pea, Endlessly swimming in a waterless sea. What am I?",
     "A dagger thrust at my own heart, Dictates the way I'm swayed. Left I stand, and right I yield, To the twisting of the blade. What am I?",
     "Weight in my belly, Trees on my back, Nails in my ribs, Feet I do lack. What am I?"
-    ]
+]
 
-riddle_A = ["Nothing", "Man", "E", "River", "Tomorrow Future", "The Stars", "N", "A Coffin", "Charcoal", "Corn", "Fire", "Iron", "Wine", "Wind", "Time", "Icicle", "Echo", "Water", "Barrel", "Reflection", "Silence", "Wholesome", "Egg", "Ton", "Thorn", "Pearl", "Footsteps", "Fish", "Air", "Mailbox", "Envelope", "Heroine", "Imagination", "Mercury", "Six 6", "Asteroid", "Lock", "Ship Boat"]
+riddle_A = ["Nothing", "Man", "E", "River", "Tomorrow Future", "The Stars", "N", "A Coffin", "Charcoal", "Corn", "Fire",
+            "Iron", "Wine", "Wind", "Time", "Icicle", "Echo", "Water", "Barrel", "Reflection", "Silence", "Wholesome",
+            "Egg", "Ton", "Thorn", "Pearl", "Footsteps", "Fish", "Air", "Mailbox", "Envelope", "Heroine", "Imagination",
+            "Mercury", "Six 6", "Asteroid", "Lock", "Ship Boat"]
 
 abc_list = list("ABCDEFGHIJKLMNO")
 
 moveset_A = ["UR", "RD", "UR", "URD", "RD", "UR", "UD", "RD", "UR", "UD", "URD", "UD", "RD", "U", "RD"]
 moveset_B = ["RL", "UL", "DL", "RL", "L", "UL", "RD", "UL", "DL", "R", "RL", "R", "RL", "UR", "RDL", ]
 moveset_C = ["RL", "U", "RD", "UL", "RD", "D", "UL", "RD", "UR", "DL", "RL", "RL", "RL", "RL", "RL", "RL", ]
-moveset_D = ["URL", "UD", "UDL", "D", "URL", "UD", "UD", "RDL", "RL", "UR", "DL", "RL", "UL", "DL", "RL",]
+moveset_D = ["URL", "UD", "UDL", "D", "URL", "UD", "UD", "RDL", "RL", "UR", "DL", "RL", "UL", "DL", "RL", ]
 moveset_E = ["L", "UR", "UD", "RD", "RL", "UR", "URD", "UD", "LD", "RL", "UR", "ULD", "URD", "D", "RL"]
-moveset_F = ["UR", "DL", "UR", "DL", "UL", "DL", "L", "UR", "UD", "DL", "L", "UR", "RDL", "UR", "DL" ]
-moveset_G = ["RL", "R", "RL", "UR", "UDL", "UD", "UD", "LD", "U", "U", "URD", "RDL", "L", "UL", "RD" ]
+moveset_F = ["UR", "DL", "UR", "DL", "UL", "DL", "L", "UR", "UD", "DL", "L", "UR", "RDL", "UR", "DL"]
+moveset_G = ["RL", "R", "RL", "UR", "UDL", "UD", "UD", "LD", "U", "U", "URD", "RDL", "L", "UL", "RD"]
 moveset_H = ["L", "RL", "RL", "L", "UL", "UD", "RD", "UR", "UD", "UD", "LD", "RL", "UR", "UD", "UL"]
-moveset_I = ["U", "RDL", "RL", "UR", "UD", "RD", "RL", "URL", "RD", "UR", "RD", "RL", "UL", "RD", "R" ]
+moveset_I = ["U", "RDL", "RL", "UR", "UD", "RD", "RL", "URL", "RD", "UR", "RD", "RL", "UL", "RD", "R"]
 moveset_J = ["UR", "LD", "RL", "RL", "R", "RL", "RL", "L", "RL", "L", "URL", "LD", "UR", "DL", "RL"]
 moveset_K = ["URL", "UD", "LD", "RL", "URL", "LD", "UL", "RD", "UL", "RD", "L", "UR", "LD", "UR", "LD"]
-moveset_L = ["RL", "UR", "UR", "RD", "UL", "UD", "UD", "LD", "UR", "LD", "UR", "LD", "U", "ULD", "RD" ]
-moveset_M = ["UL", "LD", "UR", "UD", "RD", "UR", "URD", "RD", "URL", "UD", "DL", "U", "UDR", "RD", "RL" ]
-moveset_N = ["UR", "D", "UL", "RD", "RL", "RL", "RL", "L", "UL", "UD", "UD", "UD", "LD", "UL", "RLD" ]
-moveset_O = ["UL", "UD", "UD", "LD", "UL", "LD", "UL", "UD", "UD", "UD", "UD", "UD", "UD", "UD", "LD" ]
+moveset_L = ["RL", "UR", "UR", "RD", "UL", "UD", "UD", "LD", "UR", "LD", "UR", "LD", "U", "ULD", "RD"]
+moveset_M = ["UL", "LD", "UR", "UD", "RD", "UR", "URD", "RD", "URL", "UD", "DL", "U", "UDR", "RD", "RL"]
+moveset_N = ["UR", "D", "UL", "RD", "RL", "RL", "RL", "L", "UL", "UD", "UD", "UD", "LD", "UL", "RLD"]
+moveset_O = ["UL", "UD", "UD", "LD", "UL", "LD", "UL", "UD", "UD", "UD", "UD", "UD", "UD", "UD", "LD"]
 move_set = [moveset_A, moveset_B, moveset_C,
-            moveset_D, moveset_E, moveset_F, moveset_G, moveset_H, moveset_I, moveset_J, moveset_K, moveset_L, moveset_M, moveset_N, moveset_O, ]
+            moveset_D, moveset_E, moveset_F, moveset_G, moveset_H, moveset_I, moveset_J, moveset_K, moveset_L,
+            moveset_M, moveset_N, moveset_O, ]
+
 
 # readOut("Hello, welcome to the haunted time maze!\nIn this game, you will be given a certain amount of time to complete the maze.\nEach move will deduct from your remaining time.\nAt random points along the maze, you will be presented with riddles.\nIf you answer a riddle incorrectly, some time will be deducted.\nIf you do not complete the maze in time, it is game over.\nIf you wish to solve the puzzle in the least number of moves, it will take 68 moves!\nGood Luck!\n")
 def rand_gen():
-    return int(random.randint(1,6))
+    return int(random.randint(1, 6))
+
+
 time_rem = 0
+
+
 def start_screen():
     global time_rem
     readOut("Hello, what is your name?")
     name = input("")
-    readOut("Hello "+ name + ", welcome to the haunted time maze!\nIn this game, you will be given a certain amount of time to complete the maze.\nEach move will deduct from your remaining time.\nAt random points along the maze, you will be presented with riddles.\nIf you answer a riddle incorrectly, some time will be deducted.\nIf you do not complete the maze in time, it is game over.\nIf you wish to solve the puzzle in the least number of moves, it will take 68 moves!\nGood Luck!\n")
+    readOut(
+        "Hello " + name + ", welcome to the haunted time maze!\nIn this game, you will be given a certain amount of time to complete the maze.\nEach move will deduct from your remaining time.\nAt random points along the maze, you will be presented with riddles.\nIf you answer a riddle incorrectly, some time will be deducted.\nIf you answer a riddle correctly, some time will be added\nIf you do not complete the maze in time, it is game over.\nIf you wish to solve the puzzle in the least number of moves, it will take 68 moves!\nGood Luck!\n")
     readOut("What difficulty level would you like to experience?\nEasy, Medium or Hard?")
     diff = input("Enter a difficulty. ")
     if diff.upper() == "EASY":
-        time_rem = 250
+        time_rem = 500
     elif diff.upper() == "MEDIUM":
-        time_rem = 200
+        time_rem = 375
     elif diff.upper() == "HARD":
-        time_rem = 120
+        time_rem = 250
+
+
 start_screen()
 
 unsolved = True
 current_pos_let = "H"
 current_pos_num = "1"
+
+
 def maze():
     global time_rem
     global current_pos_let
@@ -111,8 +127,8 @@ def maze():
     global unsolved
     while unsolved:
         readOut("You have " + str(time_rem) + " months remaining.\n")
-        readOut("Your current position is " + current_pos_let + current_pos_num+"\n")
-        avail_moves = move_set[abc_list.index(current_pos_let)][int(current_pos_num)-1]
+        readOut("Your current position is " + current_pos_let + current_pos_num + "\n")
+        avail_moves = move_set[abc_list.index(current_pos_let)][int(current_pos_num) - 1]
         if avail_moves == "L":
             avail_words = "Left"
         if avail_moves == "D":
@@ -139,7 +155,7 @@ def maze():
             avail_words = "Up, Right, or Left"
         if avail_moves == "URD":
             avail_words = "Up, Right, or Down"
-        readOut("Where would you like to go?\nYou can move: " + avail_words +"\n")
+        readOut("Where would you like to go?\nYou can move: " + avail_words + "\n")
         move_inp = input("Enter a move choice.\n")
         if move_inp.upper() == "LEFT" or move_inp.upper() == "RIGHT" or move_inp.upper() == "UP" or move_inp.upper() == "DOWN":
             move_inp = move_inp[:1].upper()
@@ -155,14 +171,14 @@ def maze():
                 readOut("You have won the game!")
                 unsolved = False
         if move_inp == "L":
-            current_pos_let = abc_list[abc_list.index(current_pos_let)-1] 
+            current_pos_let = abc_list[abc_list.index(current_pos_let) - 1]
         if move_inp == "R":
-            current_pos_let = abc_list[abc_list.index(current_pos_let)+1]
+            current_pos_let = abc_list[abc_list.index(current_pos_let) + 1]
         if move_inp == "U":
             current_pos_num = str(int(current_pos_num) + 1)
         if move_inp == "D":
             current_pos_num = str(int(current_pos_num) - 1)
-        time_rem = time_rem - random.randint(1,4)
+        time_rem = time_rem - random.randint(1, 4)
         if rand_gen() == 4:
             readOut("Oh you've come across the cosmic riddler. He asks you:\n")
             rand_Rid = random.randint(1, len(riddle_A))
@@ -170,6 +186,9 @@ def maze():
             rid_inp = input("")
             if rid_inp.upper() in riddle_A[rand_Rid].upper() or riddle_A[rand_Rid].upper() in rid_inp.upper():
                 readOut("You are correct, the fates ares are on your side.\n")
+                time_added = random.randint(2, 7)
+                time_rem = time_rem + time_added
+                readOut(str(time_added) + " months have been added to your journey.\n")
                 riddle_A.pop(rand_Rid)
                 riddle_Q.pop(rand_Rid)
             else:
@@ -179,6 +198,7 @@ def maze():
                 readOut(str(time_taken) + " months have been taken away from your journey.\n")
                 riddle_A.pop(rand_Rid)
                 riddle_Q.pop(rand_Rid)
-    
+
 maze()
+
     
